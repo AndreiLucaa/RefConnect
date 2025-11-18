@@ -1,0 +1,85 @@
+@rendermode InteractiveServer
+
+<div class="sidebar @(isCollapsed ? "collapsed" : "expanded")" 
+     @onmouseenter="ExpandSidebar" 
+     @onmouseleave="CollapseSidebar">
+    
+    <div class="sidebar-header">
+        @if (!isCollapsed)
+        {
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <span class="logo-text">RefConnect</span>
+            </div>
+        }
+        else
+        {
+            <div class="logo">
+                <div class="logo-icon"></div>
+            </div>
+        }
+    </div>
+
+    <nav class="sidebar-nav">
+        <ul>
+            @foreach (var link in navigationLinks)
+            {
+                <li>
+                    <a href="@link.Href" class="nav-link">
+                        <span class="nav-icon">@link.Icon</span>
+                        @if (!isCollapsed)
+                        {
+                            <span class="nav-label">@link.Label</span>
+                        }
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+        <a href="#" class="nav-link">
+            <span class="nav-icon">👤</span>
+            @if (!isCollapsed)
+            {
+                <span class="nav-label">User Profile</span>
+            }
+        </a>
+    </div>
+</div>
+
+@code {
+    private bool isCollapsed = true;
+
+    private List<NavigationLink> navigationLinks = new()
+    {
+        new NavigationLink { Label = "Dashboard", Href = "/", Icon = "📊" },
+        new NavigationLink { Label = "Championships", Href = "/championships", Icon = "🏆" },
+        new NavigationLink { Label = "Matches", Href = "/matches", Icon = "⚽" },
+        new NavigationLink { Label = "Teams", Href = "/teams", Icon = "👥" },
+        new NavigationLink { Label = "Posts", Href = "/posts", Icon = "📝" },
+        new NavigationLink { Label = "Comments", Href = "/comments", Icon = "💬" },
+        new NavigationLink { Label = "Group Chats", Href = "/groupchats", Icon = "👥" },
+        new NavigationLink { Label = "Referees", Href = "/referees", Icon = "🔰" },
+        new NavigationLink { Label = "Settings", Href = "/settings", Icon = "⚙️" },
+        new NavigationLink { Label = "Logout", Href = "/logout", Icon = "🚪" }
+    };
+
+    private void ExpandSidebar()
+    {
+        isCollapsed = false;
+    }
+
+    private void CollapseSidebar()
+    {
+        isCollapsed = true;
+    }
+
+    public class NavigationLink
+    {
+        public string Label { get; set; } = string.Empty;
+        public string Href { get; set; } = string.Empty;
+        public string Icon { get; set; } = string.Empty;
+    }
+}
+

@@ -1,0 +1,96 @@
+@page "/championships"
+@rendermode InteractiveServer
+@using RefConnect.Models
+
+<PageTitle>Championships</PageTitle>
+
+<div class="page-container">
+    <div class="page-header">
+        <h1>Championships</h1>
+        <button class="btn-primary" @onclick="ShowAddForm">Add Championship</button>
+    </div>
+
+    @if (showAddForm)
+    {
+        <div class="form-container">
+            <h3>Add New Championship</h3>
+            <EditForm Model="newChampionship" OnValidSubmit="AddChampionship">
+                <div class="form-group">
+                    <label>Championship Name:</label>
+                    <InputText @bind-Value="newChampionship.numeCampionat" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Country:</label>
+                    <InputText @bind-Value="newChampionship.tara" class="form-control" />
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Save</button>
+                    <button type="button" class="btn-secondary" @onclick="CancelAdd">Cancel</button>
+                </div>
+            </EditForm>
+        </div>
+    }
+
+    <div class="items-grid">
+        @foreach (var championship in championships)
+        {
+            <div class="item-card">
+                <h3>@championship.numeCampionat</h3>
+                <p>Country: @championship.tara</p>
+                <div class="card-actions">
+                    <button class="btn-sm" @onclick="() => EditChampionship(championship)">Edit</button>
+                    <button class="btn-sm btn-danger" @onclick="() => DeleteChampionship(championship)">Delete</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private List<Champioship> championships = new();
+    private Champioship newChampionship = new();
+    private bool showAddForm;
+
+    protected override void OnInitialized()
+    {
+        // Sample data - replace with actual database calls
+        championships = new List<Champioship>
+        {
+            new Champioship { idCampionat = "1", numeCampionat = "Premier League", tara = "England" },
+            new Champioship { idCampionat = "2", numeCampionat = "La Liga", tara = "Spain" },
+            new Champioship { idCampionat = "3", numeCampionat = "Serie A", tara = "Italy" }
+        };
+    }
+
+    private void ShowAddForm()
+    {
+        showAddForm = true;
+        newChampionship = new Champioship();
+    }
+
+    private void CancelAdd()
+    {
+        showAddForm = false;
+        newChampionship = new Champioship();
+    }
+
+    private void AddChampionship()
+    {
+        newChampionship.idCampionat = Guid.NewGuid().ToString();
+        championships.Add(newChampionship);
+        showAddForm = false;
+        newChampionship = new Champioship();
+    }
+
+    private void EditChampionship(Champioship championship)
+    {
+        // Implement edit logic
+    }
+
+    private void DeleteChampionship(Champioship championship)
+    {
+        championships.Remove(championship);
+    }
+}
+
+

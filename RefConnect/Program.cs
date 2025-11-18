@@ -17,6 +17,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents();
 
 var app = builder.Build();
 
@@ -33,6 +35,8 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseAntiforgery();
+
 app.MapStaticAssets();
 
 app.MapControllerRoute(
@@ -40,5 +44,7 @@ app.MapControllerRoute(
         pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+app.MapRazorComponents<RefConnect.Components.App>()
+    .AddInteractiveServerRenderMode();
 
 app.Run();
