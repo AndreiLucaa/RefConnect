@@ -1,6 +1,6 @@
 namespace RefConnect.Controllers;
 
-public class GroupchatController
+public class PostsController
 {
     
 }
