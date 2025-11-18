@@ -1,12 +1,19 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RefConnect;
-
-
+using RefConnect.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString =
+    builder.Configuration.GetConnectionString("DefaultConnection") ??
+    throw new InvalidOperationException(
+        "Connection string 'DefaultConnection' not found."); 
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseMySql(connectionString,
+        ServerVersion.Parse("8.0.31")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

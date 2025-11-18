@@ -9,9 +9,9 @@ public class userArbitru
         Referee
     }
     
-    [Key] public string userId { get; set; }
+    [Key] public string? userId { get; set; }
     public Role role { get; set; }
-    public string nume { get; set; }
-    public string prenume { get; set; }
-    public string email { get; set; }
+    public string? nume { get; set; }
+    public string? prenume { get; set; }
+    public string? email { get; set; }
 }
