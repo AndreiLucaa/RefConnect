@@ -1,6 +1,6 @@
 namespace RefConnect.Controllers;
 
-public class userArbitrusController
+public class userRefereesController
 {
     
 }

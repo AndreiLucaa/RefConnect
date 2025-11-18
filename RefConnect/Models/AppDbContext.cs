@@ -1,6 +1,9 @@
-namespace RefConnect.Models;
-
-public class AppDbContext
+using Microsoft.EntityFrameworkCore;
+public class AppDbContext : DbContext
 {
-    
+    public AppDbContext(DbContextOptions<AppDbContext>
+        options)
+        : base(options)
+    {
+    }
 }

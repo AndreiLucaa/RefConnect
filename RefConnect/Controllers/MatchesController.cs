@@ -1,6 +1,6 @@
 namespace RefConnect.Controllers;
 
-public class MeciController
+public class MatchesController
 {
     
 }

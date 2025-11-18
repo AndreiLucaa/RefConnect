@@ -1,6 +1,6 @@
 namespace RefConnect.Controllers;
 
-public class ComentariuController
+public class ChampionshipsController
 {
     
 }
