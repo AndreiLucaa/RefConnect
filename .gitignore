@@ -4,7 +4,7 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 
-# Development settings
+
 **/appsettings.Development.json
 
 # User-specific files
