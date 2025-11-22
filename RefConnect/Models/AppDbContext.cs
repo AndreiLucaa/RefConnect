@@ -4,12 +4,14 @@ namespace RefConnect.Models;
 
 public class AppDbContext : DbContext
 {
+    public IEnumerable<object> userReferees;
+
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }
 
     // DbSet properties for each entity in the Models folder
-    public DbSet<Champioship> Champioships { get; set; }
+    public DbSet<Championship> Champioships { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<GroupChat> GroupChats { get; set; }
     public DbSet<Match> Matches { get; set; }
