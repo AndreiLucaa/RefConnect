@@ -9,5 +9,7 @@ public class Post
     public string? linkVideo { get; set; }
     public string? descriere { get; set; }
     public string? idUser { get; set; }
-    public JSType.Date createdAt { get; set; }
+    
+    [DataType(DataType.DateTime)]
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }
