@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 namespace RefConnect.Models;
 
-public class userArbitru
+public class User
 {
     public enum Role
     {

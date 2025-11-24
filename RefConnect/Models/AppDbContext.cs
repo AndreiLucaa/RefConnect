@@ -17,7 +17,7 @@ public class AppDbContext : DbContext
     public DbSet<Match> Matches { get; set; }
     public DbSet<Post> Posts { get; set; }
     public DbSet<Team> Teams { get; set; }
-    public DbSet<userArbitru> UserArbitri { get; set; }
+    public DbSet<User> Users { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -4,29 +4,25 @@ using RefConnect.Models;
 namespace RefConnect.Controllers;
 
 
-public class userArbitrusController : Controller
+public class UsersController : Controller
 {
     private readonly AppDbContext _db;
-    public userArbitrusController(AppDbContext db)
+    public UsersController(AppDbContext db)
     {
         _db = db;
     }
 
     public IActionResult Index()
     {
-        var referees = from userReferee in _db.UserArbitri orderby userReferee.nume
-                          select userReferee;
-        
+        var referees = from user in _db.Users orderby user.nume
+                          select user;
         
         return View(referees.ToList());
-        
-        
-        
     }
 
     public ActionResult Show(int id)
     {
-        userArbitru arbitru = _db.UserArbitri.Find(id);
+        User arbitru = _db.Users.Find(id);
         if (arbitru == null)
         {
             return BadRequest(ModelState);
@@ -44,13 +40,13 @@ public class userArbitrusController : Controller
     
     
     [HttpPost]
-    public IActionResult Create(userArbitru referee)
+    public IActionResult Create(User referee)
     {
         try
         {
             if (ModelState.IsValid)
             {
-                _db.UserArbitri.Add(referee);
+                _db.Users.Add(referee);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -67,7 +63,7 @@ public class userArbitrusController : Controller
 
     public IActionResult Edit(int id)
     {
-        userArbitru arbitru = _db.UserArbitri.Find(id);
+        User arbitru = _db.Users.Find(id);
         if (arbitru == null)
         {
             return BadRequest(ModelState);
@@ -78,13 +74,13 @@ public class userArbitrusController : Controller
     }
 
     [HttpPost]
-    public IActionResult Edit(userArbitru referee)
+    public IActionResult Edit(User referee)
     {
         try
         {
             if(ModelState.IsValid)
             {
-                _db.UserArbitri.Update(referee);
+                _db.Users.Update(referee);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -102,13 +98,13 @@ public class userArbitrusController : Controller
     [HttpPost]
     public IActionResult Delete(int id)
     {
-        userArbitru referee = _db.UserArbitri.Find(id);
+        User referee = _db.Users.Find(id);
         if (referee == null)
         {
             return NotFound();
             
         }
-        _db.UserArbitri.Remove(referee);
+        _db.Users.Remove(referee);
         _db.SaveChanges();
         return RedirectToAction("Index");
     }
